@@ -12,11 +12,3 @@ class FunctionalTest(StaticLiveServerTestCase):
 
     def tearDown(self):
         self.browser.quit()
-
-    def test_smoke(self):
-        request = self.browser.get('/sign_up')
-        print(request)
-
-    def test_something_test_for_test_test(self):
-        request = self.browser.get('/')
-        print(request)

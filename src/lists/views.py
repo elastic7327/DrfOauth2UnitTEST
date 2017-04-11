@@ -1,17 +1,30 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.contrib.auth.models import User, Group
+from oauth2_provider.ext.rest_framework import TokenHasReadWriteScope, TokenHasScope
+from rest_framework import permissions, viewsets
+from rest_framework import generics
 
-from rest_framework import generics, status
-from rest_framework.response import Response
+from lists.serializers import UserSerializer, GroupSerializer
+
+# ViewSets define the view behavior.
+#class UserViewSet(viewsets.ModelViewSet):
+#    permission_classes = [permissions.IsAuthenticated, TokenHasReadWriteScope] 
+#    queryset = User.objects.all()
+#    serializer_class = UserSerializer
+#
+#
+#class GroupViewSet(viewsets.ModelViewSet):
+#    permission_classes = [permissions.IsAuthenticated, TokenHasScope] 
+#    required_scopes = ['groups']
+#    queryset = Group.objects.all()
+#    serializer_class = GroupSerializer
 
 
-# Create your views here.
+class UserList(generics.ListCreateAPIView):
+    #permission_classes = [permissions.IsAuthenticated, TokenHasReadWriteScope]
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
-def home_page(request):
-    """TODO: Docstring for home_page.
-
-    :arg1: TODO
-    :returns: TODO
-
-    """
-    return HttpResponse("Hello World")
+class UserDetail(generics.RetrieveUpdateDestroyAPIView):
+    #permission_classes = [permissions.IsAuthenticated, TokenHasReadWriteScope]
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
