@@ -3,6 +3,7 @@ from django.urls import reverse
 
 from django.utils import timezone
 from django.test import TestCase
+from django.utils.crypto import get_random_string
 from django.contrib.auth.models import User, Group
 
 from oauth2_provider.models import get_application_model, AccessToken
@@ -36,13 +37,13 @@ class BaseTest(APITestCase, TestCaseUtils):
     def tearDown(self):
         pass
 
-    def get_token(self, username, password, application, client):
+    def get_token(self, username, password, application):
          access_user = User.objects.get(username=username)
          access_token = AccessToken.objects.create(
              user=access_user,
              scope='read write',
              expires=timezone.now() + timedelta(seconds=300),
-             token='secret-access-token-key{0}'.format(username),
+             token=get_random_string(length=128),
              application=application
          )
          return access_token.token

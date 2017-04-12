@@ -16,12 +16,14 @@ class TestSmoke(BaseTest):
         response = self.client.get('/api/users')
         self.assertEqual(response.status_code, 401)
 
-    def test_create_toke_and_get_some_authentication(self):
+    def test_create_token_and_get_some_authentication(self):
         norm_users_token = self.get_token(self.norm_user.username,
                                             self.norm_user.password,
                                             self.application,
-                                            self.client
         )
         self.client.credentials(HTTP_AUTHORIZATION='Bearer {0}'.format(norm_users_token))
         response = self.client.get('/api/users')
         self.assertEqual(response.status_code, 200)
+
+    def test_curd_with_specidif_urls(self):
+        pass
