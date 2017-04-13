@@ -26,8 +26,12 @@ class BaseTest(APITestCase, TestCaseUtils):
                                     password="as", 
                                     is_superuser=True,
                                     is_staff=True)
+
+        #  TODO:  <13-04-17, Me> # F.B.I Warning
+        # F.B.I Warning 
+        #When We make a ClientId and ClientSecret 
         self.application = Application(
-                name='lists',
+                name='Obey for Testing Goat!',
                 user=self.admin_user,
                 client_type=Application.CLIENT_PUBLIC,
                 authorization_grant_type=Application.GRANT_PASSWORD

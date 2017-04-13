@@ -21,9 +21,7 @@ class TestSmoke(BaseTest):
                                             self.norm_user.password,
                                             self.application,
         )
+
         self.client.credentials(HTTP_AUTHORIZATION='Bearer {0}'.format(norm_users_token))
         response = self.client.get('/api/users')
         self.assertEqual(response.status_code, 200)
-
-    def test_curd_with_specidif_urls(self):
-        pass
